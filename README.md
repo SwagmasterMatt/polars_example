@@ -21,18 +21,18 @@ Polars is a fast DataFrame library implemented in Rust and designed for high-per
 ## Getting Started
 To get started, you'll need to install the required libraries. You can install them using pip:
 
-\`\`\`bash
+```bash
 pip install polars pandas matplotlib hvplot
-\`\`\`
+```
 
 ## Data
 The dataset used in this tutorial is the E.W. Brown Solar Facility dataset, available on Kaggle. It contains solar power generation data from 2016 to 2022. You can download the dataset from [this link](https://www.kaggle.com/datasets/mexwell/e-w-brown-solar-facility).
 
 To download the dataset using the Kaggle API in Kaggle notebooks, run the following command:
 
-\`\`\`bash
+```bash
 kaggle datasets download -d mexwell/e-w-brown-solar-facility
-\`\`\`
+```
 
 ## Usage
 The notebook provides detailed examples of how to perform the following tasks:
@@ -63,7 +63,7 @@ This project is licensed under the MIT License.
 The notebook demonstrates various functionalities of Polars. Below is a brief overview of the key sections:
 
 1. **Data Loading**: Load CSV files using Pandas and combine them into a single DataFrame.
-    \`\`\`python
+    ```python
     df_1_pd = pd.read_csv("BS_2016.csv")
     df_2_pd = pd.read_csv("BS_2017.csv")
     df_3_pd = pd.read_csv("BS_2018.csv")
@@ -72,25 +72,25 @@ The notebook demonstrates various functionalities of Polars. Below is a brief ov
     df_6_pd = pd.read_csv("BS_2021.csv")
     df_7_pd = pd.read_csv("BS_2022.csv")
     df_pd = pd.concat([df_1_pd, df_2_pd, df_3_pd, df_4_pd, df_5_pd, df_6_pd, df_7_pd])
-    \`\`\`
+    ```
 
 2. **Conversion to Polars**: Convert the combined Pandas DataFrame to a Polars DataFrame.
-    \`\`\`python
+    ```python
     polars_df = pl.from_pandas(df_pd)
-    \`\`\`
+    ```
 
 3. **Lazy Evaluation**: Use Polars' lazy evaluation to efficiently filter and transform the data.
-    \`\`\`python
+    ```python
     lazy_df = pl.LazyFrame(polars_df)
     df_2016 = lazy_df.select(filter_cols)
     df_2016 = df_2016.filter(pl.col("Year") == 2016)
     df_2016 = df_2016.filter(pl.col("Month") == 9)
-    \`\`\`
+    ```
 
 4. **Data Exploration**: Explore the data using various Polars functions and visualize it with hvplot via Polars.
-    \`\`\`python
+    ```python
     polars_df.describe()
     polars_df.plot.hist("TmpF")
-    \`\`\`
+    ```
 
 For a detailed walkthrough, please refer to the `polars.ipynb` notebook in this repository.
